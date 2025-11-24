@@ -1,0 +1,62 @@
+﻿<style>
+    .site-header {
+        background-color: #ffffff;
+        padding: 20px 60px;
+        font-family: 'Libre Baskerville', serif;
+        position: sticky;
+    }
+
+    .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .logo {
+        font-size: 18px;
+        font-weight: 700;
+        color: #2c2c2c;
+        margin: 0;
+        letter-spacing: 0.3px;
+    }
+
+    .header-nav {
+        display: flex;
+        gap: 45px;
+        align-items: center;
+    }
+
+        .header-nav a {
+            font-size: 14px;
+            color: #2c2c2c;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 400;
+        }
+
+            .header-nav a:hover {
+                color: #666;
+            }
+</style>
+
+
+<header class="site-header">
+    <div class="header-container">
+        <h1 class="logo">Express Voitures</h1>
+        <nav class="header-nav">
+            <a asp-controller="Home" asp-action="Index">Accueil</a>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <a asp-controller="Voitures" asp-action="Create">Ajouter une voiture</a>
+                <a asp-controller="Home" asp-action="Logout">Se déconnecter</a>
+            }
+            else
+            {
+                <a asp-controller="Home" asp-action="Login">Se connecter</a>
+            }
+        </nav>
+    </div>
+</header>
+

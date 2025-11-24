@@ -1,0 +1,92 @@
+﻿@model P5CreateYourFirstApplication.Models.VoitureModel
+
+<style>
+    body {
+        font-family: 'Libre Baskerville', serif;
+        color: #796157;
+        margin: 0;
+        padding: 0;
+    }
+
+    .delete-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 60vh;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .delete-box {
+        max-width: 500px;
+    }
+
+        .delete-box h2 {
+            color: #2C1810;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .delete-box p {
+            margin-bottom: 20px;
+        }
+
+    .voiture-info {
+        margin-bottom: 20px;
+        text-align: left;
+    }
+
+        .voiture-info strong {
+            display: inline-block;
+            width: 100px;
+        }
+
+    .btn {
+        display: inline-block;
+        padding: 8px 15px;
+        margin: 5px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-family: 'Libre Baskerville', serif;
+        font-weight: 500;
+        cursor: pointer;
+    }
+
+    .btn-danger {
+        background-color: #c82333;
+        color: white;
+        border: none;
+    }
+
+        .btn-danger:hover {
+            background-color: #a71d2a;
+        }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        color: white;
+        border: none;
+    }
+</style>
+
+<div class="delete-container">
+    <div class="delete-box">
+        <h2>Supprimer la voiture</h2>
+
+        <p>Voulez-vous vraiment supprimer cette voiture ?</p>
+
+        <div class="voiture-info">
+            <p><strong>Marque :</strong> @Model.Marque.NomMarque</p>
+            <p><strong>Modèle :</strong> @Model.Modele.NomModele</p>
+            <p><strong>Finition :</strong> @Model.Finition.NomFinition</p>
+            <p><strong>Année :</strong> @Model.Annee</p>
+        </div>
+
+        <form asp-action="Delete" method="post">
+            <input type="hidden" asp-for="Id" />
+            <button type="submit" class="btn btn-danger">Supprimer</button>
+            <a asp-action="Details" asp-controller="Voitures" asp-route-id="@Model.Id" class="btn btn-secondary">Annuler</a>
+        </form>
+    </div>
+</div>

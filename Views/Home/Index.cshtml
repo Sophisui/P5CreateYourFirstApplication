@@ -1,8 +1,75 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<P5CreateYourFirstApplication.Models.VoitureModel>
+@{
+    ViewData["Title"] = "Nos voitures";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<style>
+    .home-container {
+        font-family: 'Libre Baskerville', serif;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 20px 60px;
+    }
+
+    .home-title {
+        text-align: center;
+        font-size: 24px;
+        font-weight: 400;
+        font-style: italic;
+        color: #796157;
+        margin-bottom: 30px;
+    }
+
+    .add-car-button-container {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 50px;
+    }
+
+    .add-car-button {
+        background-color: #D09C47;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 24px;
+        font-family: 'Libre Baskerville', serif;
+        font-size: 14px;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        display: inline-block;
+    }
+
+        .add-car-button:hover {
+            background-color: #b8853d;
+            color: white;
+            text-decoration: none;
+        }
+
+    .cars-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        margin-bottom: 60px;
+    }
+</style>
+
+<div class="home-container">
+    <h2 class="home-title">Nos voitures</h2>
+
+    <div class="add-car-button-container">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <a asp-controller="Voitures" asp-action="Create" class="add-car-button">
+                + Ajouter une voiture
+            </a>
+        }
+    </div>
+
+    <div class="cars-grid">
+        @foreach (var voiture in Model)
+        {
+            @Html.Partial("_CardVoiture", voiture)
+        }
+    </div>
 </div>

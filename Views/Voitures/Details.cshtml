@@ -1,0 +1,140 @@
+﻿@model P5CreateYourFirstApplication.Models.VoitureModel
+
+<style>
+    body {
+        font-family: 'Libre Baskerville', serif;
+        color: #796157;
+        margin: 0;
+        padding: 0;
+    }
+
+    .page-container {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 20px;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 8px 15px;
+        margin-bottom: 20px;
+        color: #796157;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+
+        .btn:hover {
+            background-color: #5a6268;
+        }
+
+    .info-message {
+        margin-bottom: 20px;
+        font-size: 16px;
+    }
+
+    .content {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        align-items: flex-start;
+    }
+
+    .image-container {
+        flex: 1 1 300px;
+        max-width: 300px;
+    }
+
+        .image-container img {
+            width: 100%;
+            border-radius: 5px;
+            object-fit: cover;
+        }
+
+    .info-panel {
+        flex: 2 1 400px;
+    }
+
+        .info-panel h2 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: #2C1810; /* Prix de vente en couleur spécifique */
+        }
+
+    .info-row {
+        display: flex;
+        justify-content: flex-start;
+        margin-bottom: 10px;
+    }
+
+        .info-row .label {
+            width: 100px;
+            font-weight: bold;
+        }
+
+    .image-container, .info-panel {
+        max-width: 100%;
+    }
+
+    .info-row {
+        flex-direction: row;
+    }
+
+    }</style>
+
+<div class="page-container">
+    <a asp-controller="Home" asp-action="Index" class="btn">← Retour</a>
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="info-message">
+            Vous avez publié cette annonce, vous pouvez la :
+            <a asp-controller="Voitures" asp-action="Edit" asp-route-id="@Model.Id">modifier</a>
+            ou
+            <a asp-controller="Voitures" asp-action="Delete" asp-route-id="@Model.Id">supprimer</a>
+        </div>
+    }
+
+    <div class="content">
+        <div class="image-container">
+            @if (!string.IsNullOrEmpty(Model.Visuel))
+            {
+                <img src="@Model.Visuel" alt="Visuel de la voiture" />
+            }
+            else
+            {
+                <img src="/images/voiture.png" alt="Voiture" />
+            }
+        </div>
+
+        <div class="info-panel">
+            <h2>Prix de vente : @Model.PrixVente</h2>
+
+            <div class="info-list">
+                <div class="info-row">
+                    <span class="label">Année</span>
+                    <span>@Model.Annee</span>
+                </div>
+
+                <div class="info-row">
+                    <span class="label">Couleur</span>
+                    <span>@Model.Couleur</span>
+                </div>
+
+                <div class="info-row">
+                    <span class="label">Marque</span>
+                    <span>@Model.Marque.NomMarque</span>
+                </div>
+
+                <div class="info-row">
+                    <span class="label">Modèle</span>
+                    <span>@Model.Modele.NomModele</span>
+                </div>
+
+                <div class="info-row">
+                    <span class="label">Finition</span>
+                    <span>@Model.Finition.NomFinition</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

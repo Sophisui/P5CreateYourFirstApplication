@@ -1,0 +1,46 @@
+﻿@model P5CreateYourFirstApplication.Models.VoitureModel
+
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        font-family: 'Libre Baskerville', serif;
+    }
+
+    .success-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+
+    .success-box {
+        text-align: center;
+        color: #796157;
+    }
+
+    .btn-home {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 25px;
+        background-color: #D9A963;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-home:hover {
+        background-color: #c89750;
+    }
+</style>
+
+<div class="success-container">
+    <div class="success-box">
+        <h1 style="font-style:italic">Merci !</h1>
+        <p>votre voiture a bien été publiée</p>
+        <a asp-controller="Home" asp-action="Index" class="btn-home">Retour à l’accueil</a>
+    </div>
+</div>

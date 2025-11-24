@@ -7,14 +7,19 @@ namespace P5CreateYourFirstApplication.Models
     {
         [Key]
         public int Id { get; set; } 
-        public string CodeVin { get; set; }
+        public string? CodeVin { get; set; }
         public int Annee { get; set; }
-        public string Couleur { get; set; }
+        public string? Couleur { get; set; }
+        public string? Visuel { get; set; }
         public bool EnReparation { get; set; }
         public bool Disponible { get; set; }
         public bool Vendu { get; set; }
-        public double PrixAchat { get; set; }
-        public double PrixVente { get; set; }
+
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal PrixAchat { get; set; }
+
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal? PrixVente { get; set; }
         public DateOnly DateAchat { get; set; }
         public DateOnly? DateVente { get; set; }
 

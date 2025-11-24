@@ -1,0 +1,132 @@
+﻿@model P5CreateYourFirstApplication.Models.VoitureModel
+
+@{
+    ViewData["Title"] = "Modifier la voiture";
+}
+
+<style>
+    .edit-container {
+        font-family: 'Libre Baskerville', serif;
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 20px;
+        color: #796157;
+    }
+
+        .edit-container h2 {
+            color: #2C1810;
+            font-style: italic;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 500;
+    }
+
+    input, select {
+        width: 100%;
+        padding: 8px 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-family: 'Libre Baskerville', serif;
+        font-size: 14px;
+    }
+
+    .btn {
+        padding: 8px 20px;
+        border-radius: 5px;
+        border: none;
+        font-family: 'Libre Baskerville', serif;
+        cursor: pointer;
+        margin-right: 10px;
+    }
+
+    .btn-primary {
+        background-color: #D09C47;
+        color: white;
+    }
+
+        .btn-primary:hover {
+            background-color: #b8853d;
+        }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        color: white;
+    }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+    .image-preview {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+        .image-preview img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+</style>
+
+<div class="edit-container">
+    <h2>Modifier la voiture</h2>
+
+    <form asp-action="EditConfirmed" asp-controller="Voitures" method="post" enctype="multipart/form-data">
+        <input type="hidden" asp-for="Id" />
+
+        <div class="form-group">
+            <label asp-for="Annee">Année</label>
+            <input asp-for="Annee" type="number" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Couleur">Couleur</label>
+            <input asp-for="Couleur" type="text" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="IdMarque">Marque</label>
+            <select asp-for="IdMarque" asp-items="@(new SelectList(ViewBag.Marques, "Id", "NomMarque"))"></select>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="IdModele">Modèle</label>
+            <select asp-for="IdModele" asp-items="@(new SelectList(ViewBag.Modeles, "Id", "NomModele"))"></select>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="IdFinition">Finition</label>
+            <select asp-for="IdFinition" asp-items="@(new SelectList(ViewBag.Finitions, "Id", "NomFinition"))"></select>
+        </div>
+
+        <div class="form-group">
+            <label>Photo actuelle</label>
+            <div class="image-preview">
+                @if (!string.IsNullOrEmpty(Model.Visuel))
+                {
+                    <img src="@Model.Visuel" alt="Voiture @Model.Marque.NomMarque @Model.Modele.NomModele" />
+                }
+                else
+                {
+                    <img src="/images/voiture.png" alt="Voiture" />
+                }
+            </div>
+            <input type="file" name="photo" />
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+            <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-secondary">Annuler</a>
+        </div>
+    </form>
+</div>

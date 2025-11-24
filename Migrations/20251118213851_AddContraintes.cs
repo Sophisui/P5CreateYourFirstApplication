@@ -97,7 +97,6 @@ namespace P5CreateYourFirstApplication.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdReparation = table.Column<int>(type: "int", nullable: false),
                     NomReparation = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CoutTypeReparation = table.Column<double>(type: "float", nullable: false)
@@ -153,8 +152,8 @@ namespace P5CreateYourFirstApplication.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    ProviderKey = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
@@ -198,8 +197,8 @@ namespace P5CreateYourFirstApplication.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -219,14 +218,15 @@ namespace P5CreateYourFirstApplication.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CodeVin = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CodeVin = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Annee = table.Column<int>(type: "int", nullable: false),
-                    Couleur = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Couleur = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Visuel = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     EnReparation = table.Column<bool>(type: "bit", nullable: false),
                     Disponible = table.Column<bool>(type: "bit", nullable: false),
                     Vendu = table.Column<bool>(type: "bit", nullable: false),
-                    PrixAchat = table.Column<double>(type: "float", nullable: false),
-                    PrixVente = table.Column<double>(type: "float", nullable: false),
+                    PrixAchat = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    PrixVente = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     DateAchat = table.Column<DateOnly>(type: "date", nullable: false),
                     DateVente = table.Column<DateOnly>(type: "date", nullable: true),
                     IdMarque = table.Column<int>(type: "int", nullable: false),
@@ -264,10 +264,9 @@ namespace P5CreateYourFirstApplication.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CodeVin = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IdVoiture = table.Column<int>(type: "int", nullable: false),
-                    IdTypeReparation = table.Column<int>(type: "int", nullable: false),
-                    TypeReparationId = table.Column<int>(type: "int", nullable: false),
+                    TypeReparationId = table.Column<int>(type: "int", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CoutReparation = table.Column<double>(type: "float", nullable: false),
+                    CoutReparation = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     DateReparation = table.Column<DateOnly>(type: "date", nullable: false),
                     Statut = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -278,8 +277,7 @@ namespace P5CreateYourFirstApplication.Migrations
                         name: "FK_ReparationModel_TypeReparationModel_TypeReparationId",
                         column: x => x.TypeReparationId,
                         principalTable: "TypeReparationModel",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_ReparationModel_VoitureModel_IdVoiture",
                         column: x => x.IdVoiture,

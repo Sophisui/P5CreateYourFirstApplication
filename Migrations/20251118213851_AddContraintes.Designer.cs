@@ -12,7 +12,7 @@ using P5CreateYourFirstApplication.Data;
 namespace P5CreateYourFirstApplication.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251001162857_AddContraintes")]
+    [Migration("20251118213851_AddContraintes")]
     partial class AddContraintes
     {
         /// <inheritdoc />
@@ -170,12 +170,10 @@ namespace P5CreateYourFirstApplication.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -212,12 +210,10 @@ namespace P5CreateYourFirstApplication.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -296,8 +292,8 @@ namespace P5CreateYourFirstApplication.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("CoutReparation")
-                        .HasColumnType("float");
+                    b.Property<decimal>("CoutReparation")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateOnly>("DateReparation")
                         .HasColumnType("date");
@@ -306,9 +302,6 @@ namespace P5CreateYourFirstApplication.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("IdTypeReparation")
-                        .HasColumnType("int");
-
                     b.Property<int>("IdVoiture")
                         .HasColumnType("int");
 
@@ -316,7 +309,7 @@ namespace P5CreateYourFirstApplication.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TypeReparationId")
+                    b.Property<int?>("TypeReparationId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -343,9 +336,6 @@ namespace P5CreateYourFirstApplication.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("IdReparation")
-                        .HasColumnType("int");
-
                     b.Property<string>("NomReparation")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -367,11 +357,9 @@ namespace P5CreateYourFirstApplication.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("CodeVin")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Couleur")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateOnly>("DateAchat")
@@ -395,14 +383,17 @@ namespace P5CreateYourFirstApplication.Migrations
                     b.Property<int>("IdModele")
                         .HasColumnType("int");
 
-                    b.Property<double>("PrixAchat")
-                        .HasColumnType("float");
+                    b.Property<decimal>("PrixAchat")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<double>("PrixVente")
-                        .HasColumnType("float");
+                    b.Property<decimal?>("PrixVente")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<bool>("Vendu")
                         .HasColumnType("bit");
+
+                    b.Property<string>("Visuel")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -476,9 +467,7 @@ namespace P5CreateYourFirstApplication.Migrations
 
                     b.HasOne("P5CreateYourFirstApplication.Models.TypeReparationModel", "TypeReparation")
                         .WithMany()
-                        .HasForeignKey("TypeReparationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TypeReparationId");
 
                     b.Navigation("TypeReparation");
 
