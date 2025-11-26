@@ -35,7 +35,7 @@
     .content {
         display: flex;
         flex-wrap: wrap;
-        gap: 20px;
+        gap: 30px;
         align-items: flex-start;
     }
 
@@ -67,7 +67,7 @@
     }
 
         .info-row .label {
-            width: 100px;
+            width: 150px;
             font-weight: bold;
         }
 
@@ -133,6 +133,20 @@
                 <div class="info-row">
                     <span class="label">Finition</span>
                     <span>@Model.Finition.NomFinition</span>
+                </div>
+
+                <div class="info-row">
+                    <span class="label">Disponibilité</span>
+                    <span>
+                        @if (Model.Disponible)
+                        {
+                            <span style="color:green; font-weight:bold;">Disponible</span>
+                        }
+                        else
+                        {
+                            <span style="color:red; font-weight:bold;">Indisponible</span>
+                        }
+                    </span>
                 </div>
             </div>
         </div>

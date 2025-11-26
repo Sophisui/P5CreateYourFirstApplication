@@ -168,6 +168,7 @@ namespace P5CreateYourFirstApplication.Controllers
             voitureToUpdate.IdMarque = voiture.IdMarque;
             voitureToUpdate.IdModele = voiture.IdModele;
             voitureToUpdate.IdFinition = voiture.IdFinition;
+            voitureToUpdate.Disponible = voiture.Disponible;
 
             if (photo != null && photo.Length > 0)
             {

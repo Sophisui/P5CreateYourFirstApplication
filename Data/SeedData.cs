@@ -19,8 +19,8 @@ namespace P5CreateYourFirstApplication.Data
                 await roleManager.CreateAsync(new IdentityRole(roleName));
             }
 
-            string adminEmail = "sophie.peigne@hotmail.fr";
-            string adminPassword = "VoitureAdmin123?";
+            string adminEmail = "adressemail@test.com";
+            string adminPassword = "Voitures123!";
 
             var adminUser = await userManager.FindByEmailAsync(adminEmail);
             if (adminUser == null)
